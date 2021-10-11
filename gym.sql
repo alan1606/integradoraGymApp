@@ -53,13 +53,15 @@ create table pago_membresia(
 	id bigint unsigned not null auto_increment,
     id_cliente bigint unsigned not null,
     id_membresia bigint unsigned not null,
+    id_forma_pago bigint unsigned not null,
     fecha_venta date not null,
     fecha_inicio date not null,
     fecha_fin date not null,
     precio double not null,
     constraint pk_id primary key(id),
     constraint fk_id_cleinte_pago_membresia foreign key(id_cliente) references cliente(id),
-    constraint fk_id_membresia_pago_membresia foreign key(id_membresia) references membresia(id) 
+    constraint fk_id_membresia_pago_membresia foreign key(id_membresia) references membresia(id),
+    constraint fk_id_forma_pago_pago_membresia foreign key(id_forma_pago) references forma_pago(id)
 );
 
 create table equipo(
@@ -75,7 +77,8 @@ create table rutina(
 	id bigint unsigned not null auto_increment,
     id_cliente bigint unsigned not null,
     plantilla boolean not null,
-    constraint pk_id primary key(id)
+    constraint pk_id primary key(id),
+    constraint fk_rutina_cliente foreign key(id_cliente) references cliente(id)
 );
 
 create table ejercicio(
